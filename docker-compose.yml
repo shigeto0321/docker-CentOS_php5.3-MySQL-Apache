@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  web:
+    container_name: web
+    build:
+      context: ./docker/php/
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+    - "80:80"
+    environment:
+      # bargeでは、/usr/local/binも追加しておかないと起動できない。
+      PATH: ${PATH}:/usr/local/bin:/root/.composer/vendor/bin
+    volumes:
+      - ./src:/var/www/html
